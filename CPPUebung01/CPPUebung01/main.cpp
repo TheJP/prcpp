@@ -13,6 +13,14 @@ int main(void){
 	cout << String("03: ") << abc.substring(2, 8).substring(1, 4) << endl;
 	cout << String("04: ") << abc.substring(2, 8).substring(1, 4).substring(4, 5) << endl;
 	cout << String("05: ") << abc.substring(1, 1) << endl;
+	cout << String(String("copy")) << endl;
+	cout << String(String("toCString test").toCString().get()) << endl;
+	unique_ptr<char[]> cstring;
+	{ cstring = String("toCString test2").toCString(); } //Create and destroy String
+	cout << cstring.get() << endl;
+	String mystring("toCString test3");
+	{ unique_ptr<char[]> cstring2 = mystring.toCString(); } //Create and destroy C-String
+	cout << mystring << endl;
 	cout << String("Press enter to close...");
 	cin.ignore(); //Wait for any input
 	return 0;

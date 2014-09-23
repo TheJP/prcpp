@@ -27,14 +27,10 @@ public:
 	String concat(char c) const;
 	String concat(const String& s) const;
 	size_t length() const;
-	// Substring des Bereichs [beg, end) // falls beg ≥ m_len oder end ≤ beg: gibt leeren String zurück 
 	String substring(size_t beg, size_t end) const;
-	// erzeugt 0-terminierten C-String, kopiert Inhalt und gibt Zeigerobjekt zurück
 	unique_ptr<char[]> toCString() const;
 
-	// Ausgabe-Operator für Output-Streams (Inline-Implementation schon gegeben) friend
 	friend ostream& operator<<(ostream& os, const String& s);
-// Klassen-Methode
-	static String valueOf(int i); // erzeugt eine String-Repräsentation von i
+	static String valueOf(int i);
 };
 

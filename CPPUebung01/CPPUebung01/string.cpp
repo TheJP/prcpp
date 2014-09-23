@@ -11,7 +11,7 @@ String::String(const char const * other){
 	_start = 0;
 	_length = strlen(other);
 	_content = unique_ptr<char[]>(new char[_length]);
-	for (size_t i = 0; i < _length; ++i){ _content.get()[i] = other[i]; }
+	memcpy(this->_content.get(), other, this->_length);
 }
 
 char String::charAt(size_t index) const {
@@ -49,7 +49,12 @@ String String::substring(size_t beg, size_t end) const {
 	tmp._start += beg;
 	return tmp;
 }
-
+unique_ptr<char[]> String::toCString() const {
+	unique_ptr<char[]> tmp(new char[this->_length + 1]);
+	memcpy(tmp.get(), this->_content.get() + this->_start, this->_length);
+	tmp.get()[this->_length] = '\0';
+	return tmp;
+}
 ostream& operator<<(ostream& os, const String& s){
 	const size_t end = s._start + s._length;
 	for (size_t i = s._start; i < end; ++i){ os << s._content.get()[i]; }
