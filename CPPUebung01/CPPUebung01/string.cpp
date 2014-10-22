@@ -26,8 +26,7 @@ int String::compareTo(const String& s) const {
 bool String::operator==(const String& s) const { return this->compareTo(s) == 0; }
 String String::concat(char c) const {
 	char tmpC[2] = {c, '\0'};
-	String tmp = this->concat(String(tmpC));
-	return tmp;
+	return this->concat(String(tmpC));
 }
 String String::concat(const String& s) const {
 	String tmp;

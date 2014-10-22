@@ -21,6 +21,15 @@ int main(void){
 	String mystring("toCString test3");
 	{ unique_ptr<char[]> cstring2 = mystring.toCString(); } //Create and destroy C-String
 	cout << mystring << endl;
+	String outer1, outer2;
+	{
+		String inner1("12345");
+		outer1 = inner1;
+		String inner2("12345");
+		outer2 = inner2.substring(1, 4);
+	}
+	cout << outer1 << endl;
+	cout << outer2 << endl;
 	cout << String("Press enter to close...");
 	cin.ignore(); //Wait for any input
 	return 0;
