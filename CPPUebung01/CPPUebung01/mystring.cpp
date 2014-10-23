@@ -7,6 +7,10 @@ String::String(const String & other){
 	_length = other._length;
 	_start = other._start;
 }
+String::String(String && other) : _content(move(other._content)), _start(other._start) {
+	this->_length = other._length;
+	other._length = 0;
+}
 String::String(const char const * other){
 	_start = 0;
 	_length = strlen(other);
@@ -17,6 +21,13 @@ String & String::operator=(const String & other){
 	this->_content = other._content;
 	this->_length = other._length;
 	this->_start = other._start;
+	return *this;
+}
+String & String::operator=(String && other){
+	this->_content = move(other._content);
+	this->_length = other._length;
+	this->_start = other._start;
+	other._length = 0;
 	return *this;
 }
 

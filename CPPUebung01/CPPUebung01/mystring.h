@@ -17,8 +17,10 @@ private:
 public:
 	String();
 	String(const String & other);
+	String(String && other);
 	String(const char const * other);
 	String & operator=(const String & other);
+	String & operator=(String && other);
 	//Standard destructor
 	//~String();
 
