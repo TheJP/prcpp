@@ -2,7 +2,7 @@
 
 
 String::String() : _length(0), _start(0) { }
-String::String(const String& other){
+String::String(const String & other){
 	_content = other._content;
 	_length = other._length;
 	_start = other._start;
@@ -13,23 +13,29 @@ String::String(const char const * other){
 	_content = unique_ptr<char[]>(new char[_length]);
 	memcpy(this->_content.get(), other, this->_length);
 }
+String & String::operator=(const String & other){
+	this->_content = other._content;
+	this->_length = other._length;
+	this->_start = other._start;
+	return *this;
+}
 
 char String::charAt(size_t index) const {
 	return _content.get()[index + this->_start];
 }
-int String::compareTo(const String& s) const {
+int String::compareTo(const String & s) const {
 	int i = 0; int lmin = min(this->_length, s._length);
 	while (i < lmin && s.charAt(i) == this->charAt(i)){ ++i; }
 	return i >= lmin ?
 		(this->_length < s._length ? -1 : this->_length > s._length ? 1 : 0) :
 		(tolower(this->charAt(i)) < tolower(s.charAt(i)) ? -1 : 1);
 }
-bool String::operator==(const String& s) const { return this->compareTo(s) == 0; }
+bool String::operator==(const String & s) const { return this->compareTo(s) == 0; }
 String String::concat(char c) const {
 	char tmpC[2] = {c, '\0'};
 	return this->concat(String(tmpC));
 }
-String String::concat(const String& s) const {
+String String::concat(const String & s) const {
 	String tmp;
 	tmp._start = 0;
 	tmp._length = this->_length + s._length;
@@ -55,7 +61,7 @@ unique_ptr<char[]> String::toCString() const {
 	tmp.get()[this->_length] = '\0';
 	return tmp;
 }
-ostream& operator<<(ostream& os, const String& s){
+ostream& operator<<(ostream & os, const String & s){
 	const size_t end = s._start + s._length;
 	for (size_t i = s._start; i < end; ++i){ os << s._content.get()[i]; }
 	return os;
