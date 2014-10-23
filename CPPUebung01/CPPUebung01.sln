@@ -5,6 +5,11 @@ VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CPPUebung01", "CPPUebung01\CPPUebung01.vcxproj", "{C817D7B0-C1EF-4F13-A891-BA8E10A6FA18}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitTest", "UnitTest\UnitTest.vcxproj", "{7545D45A-CCC9-4333-81D2-01F1BEBAB126}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C817D7B0-C1EF-4F13-A891-BA8E10A6FA18} = {C817D7B0-C1EF-4F13-A891-BA8E10A6FA18}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +20,10 @@ Global
 		{C817D7B0-C1EF-4F13-A891-BA8E10A6FA18}.Debug|Win32.Build.0 = Debug|Win32
 		{C817D7B0-C1EF-4F13-A891-BA8E10A6FA18}.Release|Win32.ActiveCfg = Release|Win32
 		{C817D7B0-C1EF-4F13-A891-BA8E10A6FA18}.Release|Win32.Build.0 = Release|Win32
+		{7545D45A-CCC9-4333-81D2-01F1BEBAB126}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7545D45A-CCC9-4333-81D2-01F1BEBAB126}.Debug|Win32.Build.0 = Debug|Win32
+		{7545D45A-CCC9-4333-81D2-01F1BEBAB126}.Release|Win32.ActiveCfg = Release|Win32
+		{7545D45A-CCC9-4333-81D2-01F1BEBAB126}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,4 @@
-#include "string.h"
+#include "mystring.h"
 
 
 String::String() : _length(0), _start(0) { }
@@ -20,7 +20,8 @@ char String::charAt(size_t index) const {
 int String::compareTo(const String& s) const {
 	int i = 0; int lmin = min(this->_length, s._length);
 	while (i < lmin && s.charAt(i) == this->charAt(i)){ ++i; }
-	return i >= lmin ? 0 :
+	return i >= lmin ?
+		(this->_length < s._length ? -1 : this->_length > s._length ? 1 : 0) :
 		(tolower(this->charAt(i)) < tolower(s.charAt(i)) ? -1 : 1);
 }
 bool String::operator==(const String& s) const { return this->compareTo(s) == 0; }
@@ -58,4 +59,20 @@ ostream& operator<<(ostream& os, const String& s){
 	const size_t end = s._start + s._length;
 	for (size_t i = s._start; i < end; ++i){ os << s._content.get()[i]; }
 	return os;
+}
+String String::valueOf(int i){
+	char c[50]; int k = 0;
+	if (i == 0){ c[k] = '0'; ++k; }
+	else {
+		bool addM = i < 0;
+		while (i != 0){
+			c[k] = ('0' + abs((i % 10)));
+			i /= 10;
+			++k;
+		}
+		if (addM){ c[k] = '-'; ++k; }
+	}
+	c[k] = '\0';
+	reverse(c, c + k);
+	return String(c);
 }

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "string.h"
+#include "mystring.h"
 
 using namespace std;
 
@@ -30,6 +30,10 @@ int main(void){
 	}
 	cout << outer1 << endl;
 	cout << outer2 << endl;
+	cout << String("Nr 5: ") << String::valueOf(5) << endl;
+	cout << String("Nr 6546: ") << String::valueOf(6546) << endl;
+	cout << String("Nr 1345: ") << String::valueOf(1345) << endl;
+	cout << String("Nr -5: ") << String::valueOf(-5) << endl;
 	cout << String("Press enter to close...");
 	cin.ignore(); //Wait for any input
 	return 0;
