@@ -22,7 +22,7 @@ public class Matrix {
 		this.height = height;
 		content = new double[width * height];
 		Random r = new Random();
-		for(int i = content.length - 1; i >= 0; ++i){
+		for(int i = content.length - 1; i >= 0; --i){
 			content[i] = r.nextDouble();
 		}
 	}
@@ -37,7 +37,7 @@ public class Matrix {
 		this.width = width;
 		this.height = height;
 		content = new double[width * height];
-		for(int i = content.length - 1; i >= 0; ++i){
+		for(int i = content.length - 1; i >= 0; --i){
 			content[i] = value;
 		}
 	}
@@ -125,6 +125,20 @@ public class Matrix {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for(int y = 0; y < height; ++y){
+			int index = y * width;
+			for(int x = 0; x < width; ++x, ++index){
+				sb.append(content[index]);
+				sb.append('\t');
+			}
+			sb.append(System.lineSeparator());
+		}
+		return sb.toString();
 	}
 
 	public int getWidth() {

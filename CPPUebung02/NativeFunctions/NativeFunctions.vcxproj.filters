@@ -18,9 +18,15 @@
     <ClInclude Include="ch_fhnw_prcpp_u02_Test.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ch_fhnw_prcpp_u02_Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ch_fhnw_prcpp_u02_Test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ch_fhnw_prcpp_u02_Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -130,9 +130,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ch_fhnw_prcpp_u02_Matrix.h" />
     <ClInclude Include="ch_fhnw_prcpp_u02_Test.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ch_fhnw_prcpp_u02_Matrix.cpp" />
     <ClCompile Include="ch_fhnw_prcpp_u02_Test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
