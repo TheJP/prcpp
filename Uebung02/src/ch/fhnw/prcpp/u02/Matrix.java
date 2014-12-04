@@ -1,4 +1,4 @@
-package ch.fhnw.prcpp.u03;
+package ch.fhnw.prcpp.u02;
 
 import java.util.Random;
 
@@ -84,6 +84,32 @@ public class Matrix {
 		}
 		return result;
 	}
+
+	/**
+	 * Matrix multiplication executed in native code.
+	 * Result = this * m
+	 * An exception is thrown, if invalid dimensions are multiplied
+	 * @param m
+	 * @return
+	 */
+	public Matrix multiplyNative(Matrix m){
+		if(m.height != this.width){ throw new IllegalArgumentException(); }
+		Matrix result = new Matrix(m.width, this.height, 0);
+		Matrix.multiplyC(this.content, m.content, result.content, result.width, result.height, this.width);
+		return result;
+	}
+
+	/**
+	 * Native matrix multiplication code.
+	 * R = A * B
+	 * @param a Matrix A
+	 * @param b Matrix B
+	 * @param r Matrix R (Result)
+	 * @param x R.width
+	 * @param y R.height
+	 * @param k A.width=B.height
+	 */
+	private static native void multiplyC(double[] a, double[] b, double[] r, int x, int y, int k);
 
 	/**
 	 * Compares the matrices and returns if they are equal.
