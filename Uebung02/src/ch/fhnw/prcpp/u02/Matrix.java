@@ -1,12 +1,13 @@
 package ch.fhnw.prcpp.u02;
 
 import java.util.Random;
+import java.util.Stack;
 
 /**
  * Arithmetic matrix from Aufgabe03
  * @author JP
  */
-public class Matrix {
+public class Matrix implements Cloneable {
 	private int width;
 	private int height;
 	private double[] content;
@@ -40,6 +41,19 @@ public class Matrix {
 		for(int i = content.length - 1; i >= 0; --i){
 			content[i] = value;
 		}
+	}
+
+	/**
+	 * Returns the neutral Matrix with given dimension.
+	 * @param dimension
+	 * @return
+	 */
+	public static Matrix neutral(int dimension){
+		Matrix result = new Matrix(dimension, dimension, 0);
+		for(int i = 0; i < dimension; ++i){
+			result.set(i, i, 1.0);
+		}
+		return result;
 	}
 
 	/**
@@ -114,18 +128,73 @@ public class Matrix {
 	/**
 	 * Compares the matrices and returns if they are equal.
 	 * @param m
+	 * @param diff e
 	 * @return
 	 */
-	public boolean equals(Matrix m){
+	public boolean equals(Matrix m, double diff){
 		if(this.height != m.height || this.width != m.width){ return false; }
 		for(int y = 0; y < height; ++y){
 			int index = y * width;
 			for(int x = 0; x < width; ++x, ++index){
-				if(this.content[index] != m.content[index]){ return false; }
+				if(Math.abs(this.content[index] - m.content[index]) > diff){ return false; }
 			}
 		}
 		return true;
 	}
+
+	/**
+	 * Compares the matrices and returns if they are equal.
+	 * @param m
+	 * @return
+	 */
+	public boolean equals(Matrix m){
+		return this.equals(m, 0.000000000001);
+	}
+
+	/**
+	 * Returns the Matrix to the power of given parameter k.
+	 * A.height=A.width is required otherwise an IllegalArgumentException is thrown.
+	 * @param k
+	 * @return
+	 */
+	public Matrix power(int k){
+		if(width != height || k < 0){ throw new IllegalArgumentException(); }
+		if(k == 0){ return neutral(width); }
+		Matrix result = this.clone();
+		Stack<PowerType> s = new Stack<>();
+		while(k > 1){
+			if(k % 2 == 0){
+				s.push(PowerType.Even);
+				k /= 2;
+			} else {
+				s.push(PowerType.Odd);
+				k = (k-1) / 2;
+			}
+		}
+		while(!s.empty()){
+			PowerType p = s.pop();
+			if(p == PowerType.Even){
+				result = result.multiply(result);
+			} else if(p == PowerType.Odd){
+				result = result.multiply(result).multiply(this);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * Calculates the power with a native call.
+	 * @param k
+	 * @return
+	 */
+	public Matrix powerNative(int k){
+		if(width != height || k < 0){ throw new IllegalArgumentException(); }
+		Matrix result = new Matrix(width, height, 0);
+		powerC(this.content, result.content, width, k);
+		return result;
+	}
+
+	private static native void powerC(double[] a,  double[] r, int dimension, int k);
 
 	@Override
 	public String toString() {
@@ -139,6 +208,18 @@ public class Matrix {
 			sb.append(System.lineSeparator());
 		}
 		return sb.toString();
+	}
+
+	@Override
+	public Matrix clone() {
+		Matrix m;
+		try {
+			m = (Matrix)super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new IllegalStateException();
+		}
+		m.content = m.content.clone(); //Deep copy
+		return m;
 	}
 
 	public int getWidth() {
@@ -164,4 +245,6 @@ public class Matrix {
 	public void setContent(double[] content) {
 		this.content = content;
 	}
+
+	private static enum PowerType{ Even, Odd }
 }

@@ -7,14 +7,21 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-void multiply(jdouble * a, jdouble * b, jdouble * r, jint x, jint y, jint k);
-/*
- * Class:     ch_fhnw_prcpp_u02_Matrix
- * Method:    multiplyC
- * Signature: ([D[D[DIII)V
- */
-JNIEXPORT void JNICALL Java_ch_fhnw_prcpp_u02_Matrix_multiplyC
-  (JNIEnv *, jclass, jdoubleArray, jdoubleArray, jdoubleArray, jint, jint, jint);
+	/*
+	* Class:     ch_fhnw_prcpp_u02_Matrix
+	* Method:    multiplyC
+	* Signature: ([D[D[DIII)V
+	*/
+	JNIEXPORT void JNICALL Java_ch_fhnw_prcpp_u02_Matrix_multiplyC
+		(JNIEnv *, jclass, jdoubleArray, jdoubleArray, jdoubleArray, jint, jint, jint);
+
+	/*
+	* Class:     ch_fhnw_prcpp_u02_Matrix
+	* Method:    powerC
+	* Signature: ([D[DII)V
+	*/
+	JNIEXPORT void JNICALL Java_ch_fhnw_prcpp_u02_Matrix_powerC
+		(JNIEnv *, jclass, jdoubleArray, jdoubleArray, jint, jint);
 
 #ifdef __cplusplus
 }

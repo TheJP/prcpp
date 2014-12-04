@@ -1,7 +1,7 @@
 package ch.fhnw.prcpp.u02;
 
 
-public class Main {
+public class MainMultiply {
 
 	public static void main(String[] args) {
 		//Load c++ code
